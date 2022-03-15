@@ -1,5 +1,6 @@
 package br.com.rodrigoeduque.algalog.domain.model;
 
+import br.com.rodrigoeduque.algalog.domain.ValidationGroups;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @NotNull(groups = ValidationGroups.ClienteId.class)
     private Long id;
 
     @NotBlank

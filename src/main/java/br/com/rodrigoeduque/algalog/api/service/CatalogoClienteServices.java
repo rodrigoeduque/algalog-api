@@ -16,6 +16,11 @@ public class CatalogoClienteServices {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    public Cliente buscarPorId(Long id){
+        return clienteRepository.findById(id)
+          .orElseThrow(() -> new NegocioException("Código do Cliente não encontrado ou não existe"));
+    }
+
 
     @Transactional
     public Cliente salvarCliente(Cliente cliente){
