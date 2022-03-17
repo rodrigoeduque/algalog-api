@@ -39,7 +39,7 @@ public class Entrega {
     @Valid
     private Destinatario destinatario;
 
-    @OneToMany(mappedBy = "entrega")
+    @OneToMany(mappedBy = "entrega",cascade = CascadeType.ALL)
     private List<Ocorrencia> ocorrencias = new ArrayList<>();
 
     @NotNull
@@ -55,5 +55,17 @@ public class Entrega {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private OffsetDateTime dataFinalizacao;
+
+    public Ocorrencia adicionarOcorrencia(String descricao) {
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setDescricao(descricao);
+        ocorrencia.setDataRegistro(OffsetDateTime.now());
+        ocorrencia.setEntrega(this);
+
+        this.getOcorrencias().add(ocorrencia);
+
+        return ocorrencia;
+
+    }
 
 }
